@@ -57,10 +57,9 @@ def profile_detail_view(request, username):
     tweets = Tweet.objects.filter(user=user).order_by("-time")
     tweet_count = len(Tweet.objects.filter(user=user).all())
     notifications = notification_count_view(request)
-    following_count = 0
+    following_count = len(user.following.all())
     if request.user.is_authenticated:
         following = request.user.following.all()
-        following_count = len(request.user.following.all())
     else:
         following = []
     return render(request, "profile.html", {"user": user, "tweets": tweets, "notifications": notifications, "following": following, "tweet_count": tweet_count, "following_count": following_count})

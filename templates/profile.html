@@ -18,15 +18,15 @@
     <br>
     <h3>This user has Tweeted {{ tweet_count }} time/times!</h3>
     <h3>This user is following {{ following_count }} person/people!</h3>
+    <h3>Bio: {{ user.bio }}</h3>
     {% if user.is_authenticated %}
-        <h3>Bio: {{ user.bio }}</h3>
-        {% if user.username != request.user.username %} {% if user in following %}
-            <a href="/unfollow/{{user.username}}/"><button>Unfollow</button></a>
-        {% else %}
-            <a href="/follow/{{user.username}}/"><button>Follow</button></a>
-        {% endif %} {% endif %}
-    {% else %}
-        <h3>{{ user.bio }}</h3>
+        {% if user.username != request.user.username %} 
+            {% if user in following %}
+                <a href="/unfollow/{{user.username}}/"><button>Unfollow</button></a>
+            {% else %}
+                <a href="/follow/{{user.username}}/"><button>Follow</button></a>
+            {% endif %} 
+        {% endif %}
     {% endif %}
     <br>
     <br>
