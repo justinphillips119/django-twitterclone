@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+</head>
+<body>
+    <nav>
+        <a href="/logout/"><button>Logout</button></a>
+        <a href="/newtweet/"><button>+Tweet</button></a>
+        <a href="/notifications/{{user.id}}/"><button>Notifications {{count}}</button></a>
+        <a href="/profile/{{user.username}}/"><button>Profile</button></a>
+    </nav>
+    <br>
+    {% for tweet in feed %}
+        <ul>
+            <br>
+            <br>
+            <a href="/profile/{{tweet.user.username}}/">{{tweet.user.display_name}}</a> 
+            <a href="/profile/{{tweet.user.username}}/">@{{tweet.user.username}}</a>
+            <p>{{ tweet.tweet }}</p>
+            <h4>{{ tweet.time }}</h4>
+            <a href="/tweet/{{tweet.id}}/">View Tweet</a>
+            <br>
+            <br>
+        </ul>
+        
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <nav>
+        <a href="/logout/"><button>Logout</button></a> 
+        <a href="/"><button>Feed</button></a>
+        <a href="/newtweet/"><button>+Tweet</button></a>
+        <a href="/profile/{{user.username}}/"><button>Profile</button></a>
+        <a href="/notifications/{{user.id}}/"><button>Notifications {{count}}</button></a>
+    </nav>
+    <h1><u>{{ user.display_name }}</u></h1>
+    <h1>@{{ user.username }}</h1>
+    <br>
+    <h3>This user has Tweeted {{ tweet_count }} time/times!</h3>
+    <h3>This user is following {{ following_count }} person/people!</h3>
+    {% if user.is_authenticated %}
+        <h3>Bio: {{ user.bio }}</h3>
+        {% if user.username != request.user.username %} {% if user in following %}
+            <a href="/unfollow/{{user.username}}/"><button>Unfollow</button></a>
+        {% else %}
+            <a href="/follow/{{user.username}}/"><button>Follow</button></a>
+        {% endif %} {% endif %}
+    {% else %}
+        <h3>{{ user.bio }}</h3>
+    {% endif %}
+    <br>
+    <br>
+    {% for tweet in tweets %}
+        <ul>
+            <br>
+            <br>
+            <a href="/profile/{{tweet.user.username}}/">{{tweet.user.display_name}}</a> 
+            <br>
+            <a href="/profile/{{tweet.user.username}}/">@{{tweet.user.username}}</a>
+            <p>{{ tweet.tweet }}</p>
+            <h4>{{ tweet.time }}</h4>
+            <a href="/tweet/{{tweet.id}}/">View Tweet</a>
+            <br>
+            <br>
+        </ul>
+    {% endfor %}
+</body>
+</html>

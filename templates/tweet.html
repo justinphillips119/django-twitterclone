@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet</title>
+</head>
+<body>
+    <nav>
+        <a href="/logout/"><button>Logout</button></a>
+        <a href="/notifications/{{user.id}}/"><button>Notifications {{count}}</button></a>
+        <a href="/"><button>Feed</button></a>
+        <a href="/profile/{{user.username}}/"><button>Profile</button></a>
+    </nav>
+    <br>
+    <br>
+    <h1><a href="/profile/{{tweet.user.username}}/">{{ tweet.user.display_name }}</a></h1>
+    <h2><a href="/profile/{{tweet.user.username}}/">@{{ tweet.user.username }}</a></h2>
+    <br>
+    <h3>{{ tweet.tweet }}</h3>
+    <br>
+    <h4>{{ tweet.time }}</h4>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+</head>
+<body>
+    <nav>
+        <a href="/logout/"><button>Logout</button></a>
+        <a href="/newtweet/"><button>+Tweet</button></a>
+        <a href="/"><button>Feed</button></a>
+        <a href="/profile/{{user.username}}/"><button>Profile</button></a>
+    </nav>
+    <br>
+    <br>
+    <h1><a href="/profile/{{user.username}}/">{{ user.display_name }}</a></h1>
+    <h2><a href="/profile/{{user.username}}/">@{{ user.username }}</a></h2>
+    {% if not tagged %}
+        <h3>No notifications at this time.</h3>
+    {% else %}
+        <h3> You have {{ count }} notifications!</h3>
+    <br>
+    <br>
+        {% for tagged_tweet in tagged %}
+            <br>
+            <br>
+            <a href="/profile/{{tagged_tweet.user.username}}/"><h3>{{ tagged_tweet.user.display_name }}</h3></a>
+            <a href="/profile/{{tagged_tweet.user.username}}/"><h3>@{{ tagged_tweet.user.username }}</h3></a>
+            <br>
+            <h3>{{ tagged_tweet.tweet }}</h3>
+            <br>
+            <h4>{{ tagged_tweet.time}}</h4>
+            <a href="/tweet/{{tagged_tweet.id}}/">View Tweet</a>
+            <br>
+            <br>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
