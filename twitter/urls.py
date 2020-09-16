@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from tweet_app.views import homepage_view, user_feed_view, new_tweet_view, profile_detail_view, tweet_detail_view, follow_view, unfollow_view 
+from tweet_app.views import homepage_view, user_feed_view, NewTweetView, profile_detail_view, TweetDetailView, FollowView, UnfollowView 
 from authentication_app.views import register_view, login_view, logout_view
-from notifications_app.views import notification_view, notification_count_view
+from notifications_app.views import NotificationView, NotificationCountView
 
 urlpatterns = [
     path('', user_feed_view, name="userfeed"),
@@ -25,11 +25,11 @@ urlpatterns = [
     path('login/', login_view, name="login"),
     path('logout/', logout_view, name="logout"),
     path('homepage/', homepage_view, name="homepage"),
-    path('newtweet/', new_tweet_view, name="newtweet"),
+    path('newtweet/', NewTweetView.as_view(), name="newtweet"),
     path('profile/<str:username>/', profile_detail_view, name="profile"),
-    path('tweet/<int:tweet_id>/', tweet_detail_view, name="tweet"),
-    path('notifications/<int:user_id>/', notification_view, name="notifications"),
-    path('follow/<str:username>/', follow_view, name="follow"),
-    path('unfollow/<str:username>/', unfollow_view, name="unfollow"),
+    path('tweet/<int:tweet_id>/', TweetDetailView.as_view(), name="tweet"),
+    path('notifications/<int:user_id>/', NotificationView.as_view(), name="notifications"),
+    path('follow/<str:username>/', FollowView.as_view(), name="follow"),
+    path('unfollow/<str:username>/', UnfollowView.as_view(), name="unfollow"),
     path('admin/', admin.site.urls),
 ]
